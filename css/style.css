@@ -22,3 +22,10 @@ width: 50%;
         flex-flow: column-reverse;
         align-items: end;
 }
+
+.right{
+        display: flex;
+        flex-flow: column;
+        align-items: start;
+
+}
