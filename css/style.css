@@ -19,13 +19,13 @@ width: 50%;
 
 .left{
         display: flex;
-        flex-flow: column-reverse;
+        flex-flow: column-reverse nowrap;
         align-items: end;
 }
 
 .right{
         display: flex;
-        flex-flow: column;
+        flex-flow: column nowrap;
         align-items: start;
 
 }
