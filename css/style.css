@@ -1,0 +1,24 @@
+.app{
+        display: flex;
+        flex-direction: column-reverse;
+}
+
+.side{
+width: 50%;
+}
+
+.pit {
+        width: 35vh;
+        border: solid 1px black;
+}
+.store{
+        width: 50vh;
+        border: solid 1px black;
+
+}
+
+.left{
+        display: flex;
+        flex-flow: column-reverse;
+        align-items: end;
+}
