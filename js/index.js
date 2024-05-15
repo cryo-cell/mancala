@@ -110,6 +110,7 @@ for(let i=8; i<14; i++){
 let pits = document.getElementsByClassName("pit")
 let count =0
 let lastMoveAmount = []
+
 for(let i=8;i<14;i++){
         document.getElementById(`${i}`).disabled = true;
 
@@ -117,8 +118,27 @@ for(let i=8;i<14;i++){
 }
 
 function secondPlayerTurn(){
-        for(let i=8;i<14;i++){
+
+for(let i=1;i<7;i++){
+        document.getElementById(`${i}`).disabled = true;
+
+        //let aye = document.getElementById(`pit${i}`)
+}
+for(let i=8;i<14;i++){
+        document.getElementById(`${i}`).disabled = false;
+
+        //let aye = document.getElementById(`pit${i}`)
+}
+}
+
+function firstPlayerTurn(){
+        for(let i=1;i<7;i++){
                 document.getElementById(`${i}`).disabled = false;
+        
+                //let aye = document.getElementById(`pit${i}`)
+        }
+        for(let i=8;i<14;i++){
+                document.getElementById(`${i}`).disabled = true;
         
                 //let aye = document.getElementById(`pit${i}`)
         }
@@ -127,135 +147,285 @@ for(let i = 0; i < arr.length; i++){
         //console.log(i)
         //console.log(arr[i])
         console.log(pits[i])
-        if(i!==0&&i<7){
 
-        pits[i].addEventListener("click", (e)=>{
-                //console.log(arr[i])
-                //for pits 1 through 9 
+        if(i>0&&i<7){
+                pits[i].addEventListener("click", (e)=>{
+                        //console.log(arr[i])
+                        //for pits 1 through 9 
 
-                //record the value of the clicked pit
+                        //record the value of the clicked pit
                         count = parseInt(pits[i].innerHTML)
 
                         //reset the count of the clicked pit to 0
                         arr[i].count = 0
                         pits[i].innerHTML = parseInt(0)
                         //count = parseInt(pits[i].innerHTML)
-                       // console.log(i+count)
+                        // console.log(i+count)
                         //if(i+1!==1 && i+1 !==10){
 
                         //add one to each pit from i+1 to i + the pit value+1 to skip the clicked value
-                                for(let j=i+1; j<i+(count+1); j++){
-                                        //console.log(j)
-                                        let  counter = j - (j-1)
-                                
-                                        if(j<14){
-                                                /*if(j==7){
-                                                count = count +1 
-                                                }
-                                                else*/ 
-                                                let lastPitAmount = pits[j].innerHTML
-                                                let lastPitClass = pits[j].classList.contains("store")
-                                                let lastPitId = pits[j].id
-                                                //console.log(pits[j])
-                                                lastMoveAmount.push({lastPitClass, lastPitAmount, lastPitId})
-                                                pits[j].innerHTML = parseInt(pits[j].innerHTML) + parseInt(counter)
-                                                //console.log(lastPitAmount)
+                        for(let j=i+1; j<i+(count+1); j++){
+                                //console.log(j)
+                                let  counter = j - (j-1)
+                        
+                                if(j<14){
+                                        /*if(j==7){
+                                        count = count +1 
                                         }
-                                        else if(j==14){
-                                                count = count +1
-                                        }
-                                        else {
-                                                let lastPitAmount = pits[j-pits.length].innerHTML
-                                                let lastPitClass = pits[j-pits.length].classList.contains("store")
-                                                let lastPitId = pits[j-pits.length].id
-                                                //console.log(aye)
-                                                lastMoveAmount.push({lastPitClass, lastPitAmount, lastPitId})
-                                                pits[j-pits.length].innerHTML = parseInt(pits[j-pits.length].innerHTML) + parseInt(counter)
-                                        }
+                                        else*/ 
+                                        let lastPitAmount = pits[j].innerHTML
+                                        let lastPitClass = pits[j].classList.contains("store")
+                                        let lastPitId = pits[j].id
+                                        //console.log(pits[j])
+                                        lastMoveAmount.push({lastPitClass, lastPitAmount, lastPitId})
+                                        pits[j].innerHTML = parseInt(pits[j].innerHTML) + parseInt(counter)
+                                        //console.log(lastPitAmount)
+                                }
+                                else if(j==14){
+                                        count = count +1
+                                }
+                                else {
+                                        let lastPitAmount = pits[j-pits.length].innerHTML
+                                        let lastPitClass = pits[j-pits.length].classList.contains("store")
+                                        let lastPitId = pits[j-pits.length].id
+                                        //console.log(aye)
+                                        lastMoveAmount.push({lastPitClass, lastPitAmount, lastPitId})
+                                        pits[j-pits.length].innerHTML = parseInt(pits[j-pits.length].innerHTML) + parseInt(counter)
+                                }
 
-                                }   
+                        }   
+                       
+                        console.log(lastMoveAmount[lastMoveAmount.length-1])
+                        if(lastMoveAmount[lastMoveAmount.length-1].lastPitClass){
+                                for(let i=8;i<14;i++){
+                                        document.getElementById(`${i}`).disabled = true;
+                                        //aye.style.display = "none"
+                                }
+                        }
+                        else if(lastMoveAmount[lastMoveAmount.length-1].lastPitAmount==0&&lastMoveAmount[lastMoveAmount.length-1].lastPitId<7){
+                                console.log(lastMoveAmount[lastMoveAmount.length-1].lastPitId)  
+                                function stealMove(id){
+                                let lastMove = document.getElementById(id)
+                                if(lastMove.id=="1"){
+                                        let opp = document.getElementById("13")
+                                        let store = document.getElementById("7")
+                                        let total = parseInt(lastMove.innerHTML)+ parseInt(store.innerHTML)+ parseInt(opp.innerHTML)
+                                        store.innerHTML = total;
+                                        opp.innerHTML= 0
+                                        lastMove.innerHTML= 0
+                                        secondPlayerTurn()
+                                        //add the content of pit1 to the stor
+                                        //add the
+                                }
+                                if(lastMove.id=="2"){
+                                        let opp = document.getElementById("12")
+                                        let store = document.getElementById("7")
+                                        let total = parseInt(lastMove.innerHTML)+ parseInt(store.innerHTML)+ parseInt(opp.innerHTML)
+                                        store.innerHTML = total;
+                                        opp.innerHTML= 0
+                                        lastMove.innerHTML= 0
+                                        secondPlayerTurn()
+
+                                        //add the content of pit1 to the stor
+                                        //add the
+                                }
+                                if(lastMove.id=="3"){
+                                        let opp = document.getElementById("11")
+                                        let store = document.getElementById("7")
+                                        let total = parseInt(lastMove.innerHTML)+ parseInt(store.innerHTML)+ parseInt(opp.innerHTML)
+                                        store.innerHTML = total;
+                                        opp.innerHTML= 0
+                                        lastMove.innerHTML= 0
+                                        secondPlayerTurn()
+
+                                        //add the content of pit1 to the stor
+                                        //add the
+                                }
+                                if(lastMove.id=="4"){
+                                        let opp = document.getElementById("10")
+                                        let store = document.getElementById("7")
+                                        let total = parseInt(lastMove.innerHTML)+ parseInt(store.innerHTML)+ parseInt(opp.innerHTML)
+                                        store.innerHTML = total;
+                                        opp.innerHTML= 0
+                                        lastMove.innerHTML= 0
+                                        secondPlayerTurn()
+
+                                        //add the content of pit1 to the stor
+                                        //add the
+                                }
+                                if(lastMove.id=="5"){
+                                        let opp = document.getElementById("9")
+                                        let store = document.getElementById("7")
+                                        let total = parseInt(lastMove.innerHTML)+ parseInt(store.innerHTML)+ parseInt(opp.innerHTML)
+                                        store.innerHTML = total;
+                                        opp.innerHTML= 0
+                                        lastMove.innerHTML= 0
+                                        secondPlayerTurn()
+
+                                        //add the content of pit1 to the stor
+                                        //add the
+                                }
+                                if(lastMove.id=="6"){
+                                        let opp = document.getElementById("8")
+                                        let store = document.getElementById("7")
+                                        let total = parseInt(lastMove.innerHTML)+ parseInt(store.innerHTML)+ parseInt(opp.innerHTML)
+                                        store.innerHTML = total;
+                                        opp.innerHTML= 0
+                                        lastMove.innerHTML= 0
+                                        secondPlayerTurn()
+
+                                        //add the content of pit1 to the stor
+                                        //add the
+                                }
+
+
+                                }
+                                stealMove(lastMoveAmount[lastMoveAmount.length-1].lastPitId)
+                        } 
+                        else {
+                                for(let i=1;i<7;i++){
+                                        document.getElementById(`${i}`).disabled = true;
+
+                                        //let aye = document.getElementById(`pit${i}`)
+                                        }
+                                        for(let i=8;i<14;i++){
+                                                document.getElementById(`${i}`).disabled = false;
+        
+                                                //let aye = document.getElementById(`pit${i}`)
+                                                }
+                        }              
+        })
+}
+        
+
+        //for pits 10 through 16
+
+        if(i>7&&i<14){
+                pits[i].addEventListener("click", (e)=>{
+                //record the value of the clicked pit
+                        count = parseInt(pits[i].innerHTML)
+
+                        //reset the count of the clicked pit to 0
+                        arr[i].count = 0
+                        pits[i].innerHTML = parseInt(0)
+
+                        //add one to each pit from i+1 to i + the pit value+1 to skip the clicked value
+                        for(let j=i+1; j<i+(count+1); j++){
+                                let  counter = j - (j-1)
+
+                                if(j<14){
+                                        let lastPitAmount = pits[j].innerHTML
+                                        let lastPitClass = pits[j].classList.contains("store")
+                                        let lastPitId = pits[j].id
+                                        //console.log(pits[j])
+                                        lastMoveAmount.push({lastPitClass, lastPitAmount, lastPitId})
+                                        pits[j].innerHTML = parseInt(pits[j].innerHTML) + parseInt(counter)
+
+                                }
+                
+                                else if(pits[j-pits.length].id == 7){
+                                        count = count + 1
+                                }
+
+                                else {
+                                        let lastPitAmount = pits[j-pits.length].innerHTML
+                                        let lastPitClass = pits[j-pits.length].classList.contains("store")
+                                        let lastPitId = pits[j-pits.length].id
+
+                                        //console.log(aye)
+                                        lastMoveAmount.push({lastPitClass, lastPitAmount, lastPitId})
+                                        pits[j-pits.length].innerHTML = parseInt(pits[j-pits.length].innerHTML) + parseInt(counter); 
+                                
+                                }
+                                //add pit values to arr affectedArr 
+                                //the last value of affectedArr
+                                //compare last move of affectedArr to determine if it is a Store (you get to go again)
+                                //compare last move value vs previous value if previous value 0 and last move now is 1
+                                //add the 1 and the value of the adjacent pit to the correct Store 
+                        
                                 console.log(lastMoveAmount[lastMoveAmount.length-1])
                                 if(lastMoveAmount[lastMoveAmount.length-1].lastPitClass){
-                                        for(let i=8;i<14;i++){
-                                                 document.getElementById(`${i}`).disabled = true;
-                                                //aye.style.display = "none"
+                                        for(let i=1;i<7;i++){
+                                                document.getElementById(`${i}`).disabled = true;
+                                                console.log("stink")
+                                                secondPlayerTurn()
+                                                //let aye = document.getElementById(`pit${i}`)
                                         }
                                 }
-                                else if(lastMoveAmount[lastMoveAmount.length-1].lastPitAmount==0&&lastMoveAmount[lastMoveAmount.length-1].lastPitId<7){
-                                        console.log(lastMoveAmount[lastMoveAmount.length-1].lastPitId)  
+                                else if(lastMoveAmount[lastMoveAmount.length-1].lastPitAmount==0&&lastMoveAmount[lastMoveAmount.length-1].lastPitId>7){
                                         function stealMove(id){
-                                               let lastMove = document.getElementById(id)
-                                               if(lastMove.id=="1"){
-                                                let opp = document.getElementById("13")
-                                                let store = document.getElementById("7")
+                                        let lastMove = document.getElementById(id)
+                                        if(lastMove.id=="13"){
+                                                let opp = document.getElementById("1")
+                                                let store = document.getElementById("0")
                                                 let total = parseInt(lastMove.innerHTML)+ parseInt(store.innerHTML)+ parseInt(opp.innerHTML)
                                                 store.innerHTML = total;
                                                 opp.innerHTML= 0
                                                 lastMove.innerHTML= 0
-                                                secondPlayerTurn()
+                                                firstPlayerTurn()
                                                 //add the content of pit1 to the stor
                                                 //add the
-                                               }
-                                               if(lastMove.id=="2"){
-                                                let opp = document.getElementById("12")
-                                                let store = document.getElementById("7")
+                                        }
+                                        if(lastMove.id=="12"){
+                                                let opp = document.getElementById("2")
+                                                let store = document.getElementById("0")
                                                 let total = parseInt(lastMove.innerHTML)+ parseInt(store.innerHTML)+ parseInt(opp.innerHTML)
                                                 store.innerHTML = total;
                                                 opp.innerHTML= 0
                                                 lastMove.innerHTML= 0
-                                                secondPlayerTurn()
+                                                firstPlayerTurn()
 
                                                 //add the content of pit1 to the stor
                                                 //add the
-                                               }
-                                               if(lastMove.id=="3"){
-                                                let opp = document.getElementById("11")
-                                                let store = document.getElementById("7")
+                                        }
+                                        if(lastMove.id=="11"){
+                                                let opp = document.getElementById("3")
+                                                let store = document.getElementById("0")
                                                 let total = parseInt(lastMove.innerHTML)+ parseInt(store.innerHTML)+ parseInt(opp.innerHTML)
                                                 store.innerHTML = total;
                                                 opp.innerHTML= 0
                                                 lastMove.innerHTML= 0
-                                                secondPlayerTurn()
+                                                firstPlayerTurn()
 
                                                 //add the content of pit1 to the stor
                                                 //add the
-                                               }
-                                               if(lastMove.id=="4"){
-                                                let opp = document.getElementById("10")
-                                                let store = document.getElementById("7")
+                                        }
+                                        if(lastMove.id=="10"){
+                                                let opp = document.getElementById("4")
+                                                let store = document.getElementById("0")
                                                 let total = parseInt(lastMove.innerHTML)+ parseInt(store.innerHTML)+ parseInt(opp.innerHTML)
                                                 store.innerHTML = total;
                                                 opp.innerHTML= 0
                                                 lastMove.innerHTML= 0
-                                                secondPlayerTurn()
+                                                firstPlayerTurn()
 
                                                 //add the content of pit1 to the stor
                                                 //add the
-                                               }
-                                               if(lastMove.id=="5"){
-                                                let opp = document.getElementById("9")
-                                                let store = document.getElementById("7")
+                                        }
+                                        if(lastMove.id=="9"){
+                                                let opp = document.getElementById("5")
+                                                let store = document.getElementById("0")
                                                 let total = parseInt(lastMove.innerHTML)+ parseInt(store.innerHTML)+ parseInt(opp.innerHTML)
                                                 store.innerHTML = total;
                                                 opp.innerHTML= 0
                                                 lastMove.innerHTML= 0
-                                                secondPlayerTurn()
+                                                firstPlayerTurn()
 
                                                 //add the content of pit1 to the stor
                                                 //add the
-                                               }
-                                               if(lastMove.id=="6"){
-                                                let opp = document.getElementById("8")
-                                                let store = document.getElementById("7")
+                                        }
+                                        if(lastMove.id=="8"){
+                                                let opp = document.getElementById("6")
+                                                let store = document.getElementById("0")
                                                 let total = parseInt(lastMove.innerHTML)+ parseInt(store.innerHTML)+ parseInt(opp.innerHTML)
                                                 store.innerHTML = total;
                                                 opp.innerHTML= 0
                                                 lastMove.innerHTML= 0
-                                                secondPlayerTurn()
+                                                firstPlayerTurn()
 
                                                 //add the content of pit1 to the stor
                                                 //add the
-                                               }
+                                        }
 
 
                                         }
@@ -263,167 +433,18 @@ for(let i = 0; i < arr.length; i++){
                                 } 
                                 else {
                                         for(let i=1;i<7;i++){
+                                        document.getElementById(`${i}`).disabled = false;
+
+                                        //let aye = document.getElementById(`pit${i}`)
+                                        }
+                                        for(let i=8;i<14;i++){
                                                 document.getElementById(`${i}`).disabled = true;
         
                                                 //let aye = document.getElementById(`pit${i}`)
                                                 }
-                                                for(let i=8;i<14;i++){
-                                                        document.getElementById(`${i}`).disabled = false;
+                                }        }       
                 
-                                                        //let aye = document.getElementById(`pit${i}`)
-                                                        }
-                                }              
                 })
         }
-                
-
-                //for pits 10 through 16
-        
-                if(i>7&&i<14){
-                        pits[i].addEventListener("click", (e)=>{
-                        //record the value of the clicked pit
-                                count = parseInt(pits[i].innerHTML)
-
-                                //reset the count of the clicked pit to 0
-                                arr[i].count = 0
-                                pits[i].innerHTML = parseInt(0)
-
-                                //add one to each pit from i+1 to i + the pit value+1 to skip the clicked value
-                                for(let j=i+1; j<i+(count+1); j++){
-                                        let  counter = j - (j-1)
-
-                                        if(j<14){
-                                                let lastPitAmount = pits[j].innerHTML
-                                                let lastPitClass = pits[j].classList.contains("store")
-                                                let lastPitId = pits[j].id
-                                                //console.log(pits[j])
-                                                lastMoveAmount.push({lastPitClass, lastPitAmount, lastPitId})
-                                                pits[j].innerHTML = parseInt(pits[j].innerHTML) + parseInt(counter)
-
-                                        }
-                        
-                                        else if(pits[j-pits.length].id == 7){
-                                                count = count + 1
-                                        }
-
-                                        else {
-                                                let lastPitAmount = pits[j-pits.length].innerHTML
-                                                let lastPitClass = pits[j-pits.length].classList.contains("store")
-                                                let lastPitId = pits[j-pits.length].id
-
-                                                //console.log(aye)
-                                                lastMoveAmount.push({lastPitClass, lastPitAmount, lastPitId})
-                                                pits[j-pits.length].innerHTML = parseInt(pits[j-pits.length].innerHTML) + parseInt(counter); 
-                                        
-                                        }
-                                        //add pit values to arr affectedArr 
-                                        //the last value of affectedArr
-                                        //compare last move of affectedArr to determine if it is a Store (you get to go again)
-                                        //compare last move value vs previous value if previous value 0 and last move now is 1
-                                        //add the 1 and the value of the adjacent pit to the correct Store 
-                                
-                                        console.log(lastMoveAmount[lastMoveAmount.length-1])
-                                        if(lastMoveAmount[lastMoveAmount.length-1].lastPitClass){
-                                                for(let i=1;i<7;i++){
-                                                        document.getElementById(`${i}`).disabled = true;
-                                                        console.log("stink")
-                                                        for(let i=8;i<14;i++){
-                                                                document.getElementById(`${i}`).disabled = false;
-                        
-                                                                //let aye = document.getElementById(`pit${i}`)
-                                                                }
-                                                           //let aye = document.getElementById(`pit${i}`)
-                                                }
-                                        }
-                                        else if(lastMoveAmount[lastMoveAmount.length-1].lastPitAmount==0&&lastMoveAmount[lastMoveAmount.length-1].lastPitId>7){
-                                                function stealMove(id){
-                                                let lastMove = document.getElementById(id)
-                                                if(lastMove.id=="13"){
-                                                        let opp = document.getElementById("1")
-                                                        let store = document.getElementById("0")
-                                                        let total = parseInt(lastMove.innerHTML)+ parseInt(store.innerHTML)+ parseInt(opp.innerHTML)
-                                                        store.innerHTML = total;
-                                                        opp.innerHTML= 0
-                                                        lastMove.innerHTML= 0
-
-                                                        //add the content of pit1 to the stor
-                                                        //add the
-                                                }
-                                                if(lastMove.id=="12"){
-                                                        let opp = document.getElementById("2")
-                                                        let store = document.getElementById("0")
-                                                        let total = parseInt(lastMove.innerHTML)+ parseInt(store.innerHTML)+ parseInt(opp.innerHTML)
-                                                        store.innerHTML = total;
-                                                        opp.innerHTML= 0
-                                                        lastMove.innerHTML= 0
-
-                                                        //add the content of pit1 to the stor
-                                                        //add the
-                                                }
-                                                if(lastMove.id=="11"){
-                                                        let opp = document.getElementById("3")
-                                                        let store = document.getElementById("0")
-                                                        let total = parseInt(lastMove.innerHTML)+ parseInt(store.innerHTML)+ parseInt(opp.innerHTML)
-                                                        store.innerHTML = total;
-                                                        opp.innerHTML= 0
-                                                        lastMove.innerHTML= 0
-
-                                                        //add the content of pit1 to the stor
-                                                        //add the
-                                                }
-                                                if(lastMove.id=="10"){
-                                                        let opp = document.getElementById("4")
-                                                        let store = document.getElementById("0")
-                                                        let total = parseInt(lastMove.innerHTML)+ parseInt(store.innerHTML)+ parseInt(opp.innerHTML)
-                                                        store.innerHTML = total;
-                                                        opp.innerHTML= 0
-                                                        lastMove.innerHTML= 0
-
-                                                        //add the content of pit1 to the stor
-                                                        //add the
-                                                }
-                                                if(lastMove.id=="9"){
-                                                        let opp = document.getElementById("5")
-                                                        let store = document.getElementById("0")
-                                                        let total = parseInt(lastMove.innerHTML)+ parseInt(store.innerHTML)+ parseInt(opp.innerHTML)
-                                                        store.innerHTML = total;
-                                                        opp.innerHTML= 0
-                                                        lastMove.innerHTML= 0
-
-                                                        //add the content of pit1 to the stor
-                                                        //add the
-                                                }
-                                                if(lastMove.id=="8"){
-                                                        let opp = document.getElementById("6")
-                                                        let store = document.getElementById("0")
-                                                        let total = parseInt(lastMove.innerHTML)+ parseInt(store.innerHTML)+ parseInt(opp.innerHTML)
-                                                        store.innerHTML = total;
-                                                        opp.innerHTML= 0
-                                                        lastMove.innerHTML= 0
-
-                                                        //add the content of pit1 to the stor
-                                                        //add the
-                                                }
-
-
-                                                }
-                                                stealMove(lastMoveAmount[lastMoveAmount.length-1].lastPitId)
-                                        } 
-                                        else {
-                                                for(let i=1;i<7;i++){
-                                                document.getElementById(`${i}`).disabled = false;
-
-                                                //let aye = document.getElementById(`pit${i}`)
-                                                }
-                                                for(let i=8;i<14;i++){
-                                                        document.getElementById(`${i}`).disabled = true;
-                
-                                                        //let aye = document.getElementById(`pit${i}`)
-                                                        }
-                                        }        }       
-                        
-                        })
-                }
 
 }
-        
