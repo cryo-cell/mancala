@@ -16,6 +16,7 @@ width: 7vh;
 padding: 1vh;
 border-radius: 15px;
 
+
 }
 
 .pit {
@@ -32,7 +33,7 @@ border-radius: 15px;
         
         display: flex;
         border: solid 1px #000000;
-        margin-top: 9vh;
+        margin-top: 11vh;
 
 }
 
@@ -42,16 +43,18 @@ border-radius: 15px;
 
 }
 .store{
-        width: 100%;
-        height: 105%;
+        width: 70%;
+        height: 107%;
         border: solid 1px black;
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius: 5px 0 0 5px;
+        border-radius: 10px 10px;
         background-color: lightgrey;
+        margin-left: 7px;
 
 }
+
 
 .left{
         display: flex;
